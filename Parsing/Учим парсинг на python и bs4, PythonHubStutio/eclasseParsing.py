@@ -21,12 +21,14 @@ import lxml
 
 
 def get_diary_page_data():
+    username = input('Введите username: ')
+    password = input('Введите password: ')
     url = 'https://my.e-klase.lv/?v=15'
     user_agent = fake_useragent.UserAgent().random
     header = {'user-agent': user_agent}
     data = {
-        'UserName': '211009-21492',
-        'Password': 'j*paliek'
+        'UserName': str(username),
+        'Password': str(password)
     }
     with requests.session() as session:  # Создаём сессию(Продвинутый вариант).Обычный: session = requests.session()
         session.get(url)  # Получаем Куки
