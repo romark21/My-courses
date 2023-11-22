@@ -1,7 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from bs4 import Tag
-import lxml
 from time import sleep
 import re
 
@@ -34,7 +32,7 @@ brand_auto = input(f"Введите название марки автомоби
 print()
 def get_url():
     count = 1
-    while count < 2:
+    while count <=1:
         url = f'https://www.ss.com/ru/transport/cars/{brand_auto}/page{count}.html'
         response = requests.get(url, headers=headers)
         soup = BeautifulSoup(response.text, 'lxml')
@@ -53,8 +51,9 @@ for i, url in enumerate(get_url(), 1):
     sleep(2)
     soup = BeautifulSoup(response.text, 'lxml')
 
-    data = soup.find('div', {'id': 'msg_div_msg'})
-
+    data = soup.find('div', {'id': 'content_main_div'})
+    # content_main_div
+    # msg_div_msg
     try: #Проверяем соответствуют ли данные нашему запросу, если да присвоиваем
         year = data.find('td', {'id': 'tdo_18'}).text #, если да присвоиваем, тогда добавляем в переменную
     except AttributeError: #Если возникнет ошибка, тогда присвоим переменной другое значени и цикл не прирвётся
@@ -95,15 +94,23 @@ for i, url in enumerate(get_url(), 1):
     except AttributeError:
         technical_inspection = "--------"
 
+    try:
+        photo_url = data.find('div', class_='pic_dv_thumbnail').find('a').get('href')
+    except AttributeError:
+        photo_url = "--------"
+
     del_str = data.text.find('Марка')
     description = re.sub("^\s+|\n|\r|", '', data.text[:del_str])
+    if len(description) > 4000:
+        split_text = [description[i:i + 4000] for i in range(0, len(description), 4000)]
 
 
 
     print(f'{i})\nМодель: {model}\n{"-" * 20}\nГод выпуска: {year}\n{"-" * 20}\nДвигатель: {motor}\n{"-" * 20}\n'
           f'КПП: {transmission}\n{"-" * 20}\nТип кузова: {car_body}\n{"-" * 20}\nЦвет: {color}\n{"-" * 20}\n'
           f'Пробег: {car_mileage} км.\n{"-" * 20}\nТех.Осмотр: {technical_inspection}\n{"-" * 20}\n'
-          f'Описание: {description}\n{url}\n{"-" * 60}\n')
+          f'Описание: {description}\n{url}\n{"-" * 60}\n'
+          f'Ссылка на фото автомобиля: {photo_url}\n{"-" * 60}\n')
     print()
 # if __name__ == "__main__":
 #     main()
