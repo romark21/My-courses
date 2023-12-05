@@ -1641,5 +1641,58 @@ print(color)
 ------------------------------------------------------------------------------------------------------------------
 """
 
-rename = print
-rename(2)
+"""
+------------------------------------------------------------------------------------------------------------------
+Требуется вывести квадрат, состоящий из N×N клеток, заполненных числами от 1 до N2 по спирали (см. примеры).
+
+Входные данные
+Программа получает на вход одно число n.
+
+Выходные данные
+Программа должна вывести матрицу, заполненную числами от 1 до N2 по спирали,
+при этом между числами может быть любое количество пробелов. Не допускается начинать спираль в ином,
+кроме верхнего левого, углу, закручивать спираль против часовой стрелки или изнутри наружу.
+
+Разбор задачи 
+
+Sample Input:
+
+3
+Sample Output:
+
+1 2 3
+8 9 4
+7 6 5
+
+n = int(input())
+matrix = [[0] * n for i in range(n)]
+count = 1
+current_row = 0
+current_column = -1
+move_row = 0
+move_column = 1
+
+while count <= n ** 2:
+    if 0 <= current_row + move_row < n and 0 <= current_column + move_column < n and matrix[current_row + move_row][current_column + move_column] == 0:
+        current_row += move_row
+        current_column += move_column
+        matrix[current_row][current_column] = count
+        count += 1
+    else:
+        if move_column == 1:
+            move_column = 0
+            move_row = 1
+        elif move_row == 1:
+            move_row = 0
+            move_column = -1
+        elif move_column == -1:
+            move_column = 0
+            move_row = -1
+        elif move_row == -1:
+            move_row = 0
+            move_column = 1
+
+[print(*matrix[i]) for i in range(len(matrix))]
+
+------------------------------------------------------------------------------------------------------------------
+"""
