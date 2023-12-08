@@ -1696,3 +1696,17 @@ while count <= n ** 2:
 
 ------------------------------------------------------------------------------------------------------------------
 """
+
+
+r, c = map(int, input().split())
+input_pie = [(input().split()) for j in range(r)]
+output_pie = [[False] * c for j in range(r)]
+count = 0
+
+for row in range(len(input_pie)):
+    if 'S' not in input_pie[row]:
+        for column in range(c):
+            output_pie[row][column] = True
+
+print(input_pie)
+print(output_pie)

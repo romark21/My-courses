@@ -1084,8 +1084,12 @@ Sample Output:
 print('\n'.join(input().split()))
 ------------------------------------------------------------------------------------------------------------------
 """
-a = int(input())
-if a % 2 == 0:
-    print("Чётное")
-else:
-    print("Не чётное")
+
+input_pie = [[1, 2, 3, 4, 'f'], [4, 8, 'r', 3]]
+t = 'f'
+
+for i in range(len(input_pie)):
+    if 'f' in input_pie[i]:
+        print('Yes')
+    else:
+        print('No')
