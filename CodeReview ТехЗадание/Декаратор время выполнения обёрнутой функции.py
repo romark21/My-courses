@@ -1,6 +1,10 @@
-def decoration_function(func):
-    import time
+from functools import wraps
+import time
 
+
+def decoration_function(func):
+
+    @wraps(func)
     def wrapper():
         start_time = time.time()
         print(func(1000))  #Для того чтобы декорируемая функция возвратила своё значение, нужно в этой строке написать: print(func())
