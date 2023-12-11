@@ -1,18 +1,18 @@
 def decoration_function(func):
-    from _datetime import datetime
+    import time
 
     def wrapper():
-        start_time = datetime.now()
-        func()
-        finish_time = datetime.now() - start_time
+        start_time = time.time()
+        print(func(1000))  #Для того чтобы декорируемая функция возвратила своё значение, нужно в этой строке написать: print(func())
+        # Чтобы функция принимала аргументы, нужно добавить аргумент. В нашем случае, аргументом является 1000.
+        finish_time = time.time() - start_time
         return f'Время выполнения функции: {finish_time}'
-
     return wrapper()
 
 
 @decoration_function
-def get_list():
-    result = [i for i in range(100000)]
+def get_list(num):  # Чтобы функция принимала аргументы, нужно добавить параметр.
+    result = [i for i in range(num)]    # Подставить его в нужное нам место.
     return result
 
 
