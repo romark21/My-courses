@@ -14,7 +14,7 @@ class Square:
         if self.start <= self.finish:
             num = self.start
             self.start += 1
-            return f' Число {num} в квадрате, равна {num ** 2}'
+            return f' Number {num} squared is {num ** 2}'
         else:
             raise StopIteration
 
