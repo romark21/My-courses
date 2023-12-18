@@ -1,6 +1,5 @@
 """
-В задании было условие, возвратить, только элементы с чётными или нечётными индексами.
-Но я вывел все, только в результате подписал, какой элемент под чётным индексом, а какой под нечётным.
+Сделал ка по первому заданию. Выводим только по одному параметру. В данном случае праграмма выводит по чётным индексам.
 """
 
 class OddEven:
@@ -19,7 +18,7 @@ class OddEven:
             if self.current % 2 == 0:
                 return f'"{value}" - Чётный индекс'
             else:
-                return f'"{value}" - Нечётный индекс'
+                pass
         else:
             raise StopIteration
 
@@ -28,8 +27,10 @@ my_data = ['one', 'two', 'three', 'car', 'phone', 7, 'python', '234']
 
 it = OddEven(my_data)
 
-for count, item in enumerate(it, 1):
-    print(count, item)
+for item in it:
+    if item is None:
+        continue
+    print(item)
 
 
 # data = [*map(str, input('Введите элементы через пробел: ').split())]
