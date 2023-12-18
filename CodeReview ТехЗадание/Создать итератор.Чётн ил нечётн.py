@@ -17,8 +17,6 @@ class OddEven:
             self.current += 1
             if self.current % 2 == 0:
                 return f'"{value}" - Чётный индекс'
-            else:
-                pass
         else:
             raise StopIteration
 
